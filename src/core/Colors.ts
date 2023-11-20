@@ -7,7 +7,7 @@ const Colors = {
   green: '#4BB050',
   grey: '#9393AA',
   black: '#14243A',
-  backText: '#1E1F20',
+  blackText: '#333333',
   borderColor: '#F0F0F0',
   placeholderTextColor: '#9393AA',
   blue: "#3b75dd"
