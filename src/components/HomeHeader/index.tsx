@@ -24,7 +24,7 @@ const Header = memo(() => {
                 Hà Nội
             </Text>
             <TouchableOpacity>
-                <Icon name="add" size={24} color={Colors.blackText} />
+                <Icon name="add" size={28} color={Colors.blackText} />
             </TouchableOpacity>
         </View>
     );

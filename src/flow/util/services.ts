@@ -15,3 +15,12 @@ export async function searchCityByName(data: any){
     return axios.get(CITY_URL + '/search', { params });
 };
 
+export async function searchCityByLocation(data: any){
+    let params = {
+        format: 'json',
+        lat: data && data.lat ? data.lat : '',
+        lon: data && data.lon ? data.lon : '',
+    }
+    return axios.get(CITY_URL + '/reverse', { params });
+};
+
