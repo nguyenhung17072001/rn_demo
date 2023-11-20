@@ -39,7 +39,7 @@ function MyTabs() {
             tabBarStyle: {
                 height: Constants.height*0.065,
 
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.backgroundColor,
                 borderWidth: 0,
             },
             tabBarLabelStyle: {
