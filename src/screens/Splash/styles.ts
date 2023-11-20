@@ -3,22 +3,22 @@ import {Colors, Fonts} from '../../core';
 const {height, width} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.green,
+    backgroundColor: Colors.backgroundColor,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   logo: {
-    height: width,
-    width: width ,
-    marginTop: -height * 0.16,
+    height: width * 0.3,
+    width: width * 0.3,
+
     marginBottom: height * 0.02,
   },
   appNameText: {
     color: Colors.white,
     fontFamily: Fonts.bold,
     fontSize: 28,
-    marginVertical: height*0.1,
+    
   },
   sloganText: {
     color: Colors.grey,

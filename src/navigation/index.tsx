@@ -9,6 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Splash from '../screens/Splash';
 
 //navigation
+import HomeNavigation from './HomeNavigation';
 
 const Stack = createStackNavigator();
 const RootNavigation = memo(() => {
@@ -23,7 +24,7 @@ const RootNavigation = memo(() => {
         
         <Stack.Screen
           name={'HomeNavigation'}
-          component={View} //HomeNavigation
+          component={HomeNavigation} //HomeNavigation
           options={{headerShown: false}}
         />
       </Stack.Navigator>

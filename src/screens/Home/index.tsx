@@ -1,24 +1,16 @@
 import React, {memo, useEffect, useRef} from 'react';
 import {View, Text, Image, StatusBar, SafeAreaView} from 'react-native';
-import {Images, Colors, Strings} from '../../core';
+import {Images, Colors, Strings, Constants} from '../../core';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-const Splash = memo(() => {
+const Home = memo(() => {
   const navigation = useNavigation();
   
 
-  useEffect(() => {
-    clearTimeout(timeout);
-    const timeout = setTimeout(() => {
-      
-      
-        navigation.replace('HomeNavigation');
-      
-    }, 1500);
-  }, []);
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,14 +19,6 @@ const Splash = memo(() => {
             barStyle={'dark-content'}
         />
         
-        <Image
-            resizeMode="contain"
-            style={[styles.logo]}
-            source={Images.logo}
-        />
-        <Text style={styles.appNameText}>
-            {Strings.appName}
-        </Text>
         
 
       
@@ -43,4 +27,4 @@ const Splash = memo(() => {
   );
 });
 
-export default Splash;
+export default Home;

@@ -1,5 +1,5 @@
 const Strings = {
-  appName: 'Base project',
+  appName: 'Weather',
 };
 
 export default Strings;
