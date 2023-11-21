@@ -7,10 +7,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Entypo from 'react-native-vector-icons/Entypo';
-import Home from '../screens/Home';
+
 
 //tabbar
-
+import Home from '../screens/Home';
+import CityList from '../screens/CityList';
 
 //router
 
@@ -55,37 +56,11 @@ function MyTabs() {
                     
                 }}
             />
-            <Tab.Screen
-                name={"TrafficSign"} 
-                component={View} 
-                options={{
-                    tabBarIcon: ({ focused, color }) => <View style={[styles.backgroundIcon,
-                        focused && {backgroundColor: Colors.whiteBackground}
-                    ]}>
-                        <FontAwesome5 size={focused?28:22} color={focused? Colors.black:Colors.placeholderTextColor} name={"traffic-light"} style={styles.tabIcon} />
-                    </View>
-                    
-                }}
-            />
-            
-            
             <Tab.Screen 
-                name={"Theory"} 
-                component={View} 
+                name={"CityList"} 
+                component={CityList} 
                 options={{
-                    tabBarIcon: ({ focused, color }) => <TabIcon focused={focused} color={focused? Colors.black:Colors.placeholderTextColor} name={"book"} />,
-                    
-                }}
-            />
-            <Tab.Screen 
-                name={"Practice"} 
-                component={View} 
-                options={{
-                    tabBarIcon: ({ focused, color }) => <View style={[styles.backgroundIcon,
-                        focused && {backgroundColor: Colors.whiteBackground}
-                    ]}>
-                        <Entypo size={focused?28:22} color={focused? Colors.black:Colors.placeholderTextColor} name={"classic-computer"} style={styles.tabIcon} />
-                    </View>
+                    tabBarIcon: ({ focused, color }) => <TabIcon focused={focused} color={focused? Colors.black:Colors.placeholderTextColor} name={"earth"} />,
                     
                 }}
             />
@@ -137,6 +112,6 @@ const styles = StyleSheet.create({
         minWidth: 40,
         justifyContent: "center",
         alignItems: "center",
-    }
+    },
 })
 export default HomeNavigation;

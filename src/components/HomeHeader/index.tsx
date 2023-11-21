@@ -28,7 +28,7 @@ const Header = memo((props: HeaderProps) => {
                 {props.headerName}
             </Text>
             <TouchableOpacity>
-                <Icon name="add" size={28} color={Colors.blackText} />
+                {/* <Icon name="add" size={28} color={Colors.blackText} /> */}
             </TouchableOpacity>
         </View>
     );
