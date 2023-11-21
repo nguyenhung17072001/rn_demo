@@ -6,10 +6,14 @@ import {
 
 
 } from '../reducers/mainCity';
+import { searchCityByLocation } from '../util/services';
 
-export function* addMainCity(action) {
+
+export function* addMainCity(action: any) {
     try {
         console.log("action: ", action.payload)
+        const res = yield call(searchCityByLocation, action.payload);
+        console.log("res: ", res.data)
         //yield put(fetchImageDataSuccess(imagePaths))
         
     } catch (error) {

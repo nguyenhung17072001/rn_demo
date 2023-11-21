@@ -12,8 +12,6 @@ const http = axios.create({
 http.interceptors.request.use(
     async (config) => {
         const token = await AsyncStorage.getItem('token');
-        config.headers.Authorization = `Bearer ${token}`;
-    
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -25,7 +23,7 @@ http.interceptors.request.use(
 );
 
 // handle the unauthorized exception
-http.interceptors.response.use(function(response) {
+/* http.interceptors.response.use(function(response) {
     return response;
 }, async function(error, _) {
 
@@ -43,7 +41,7 @@ http.interceptors.response.use(function(response) {
     }
     throw 'Lỗi từ server';
   
-});
+}); */
 
 
 export default http;

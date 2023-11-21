@@ -31,15 +31,23 @@ const Home = memo((props: HomeProps) => {
     const getCurrentLocation = () => {
         Geolocation.getCurrentPosition((res)=> {
             setRegion({
-                latitude: res.coords.latitude,
-                longitude: res.coords.longitude,
+                lat: res.coords.latitude,
+                lon: res.coords.longitude,
                 
             });
-            props.addMainCity(region);
-        });
+            //console.log("region: ", )
+            if(region) {
+                props.addMainCity({
+                    lat: res.coords.latitude,
+                    lon: res.coords.longitude,
+                });
+            }
+            
+        })
     };
     useEffect(()=> {
         getCurrentLocation();
+        
     }, []);
     
 

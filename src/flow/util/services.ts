@@ -1,4 +1,5 @@
-import axios from "axios";
+//import axios from "axios";
+import axios from './http';
 import { URL } from './url';
 
 
@@ -18,9 +19,10 @@ export async function searchCityByName(data: any){
 export async function searchCityByLocation(data: any){
     let params = {
         format: 'json',
-        lat: data && data.lat ? data.lat : '',
-        lon: data && data.lon ? data.lon : '',
+        lat: data && data.lat ? data.lat : 0,
+        lon: data && data.lon ? data.lon : 0,
     }
+    console.log("datsdddđa: ", data.lat)
     return axios.get(CITY_URL + '/reverse', { params });
 };
 
