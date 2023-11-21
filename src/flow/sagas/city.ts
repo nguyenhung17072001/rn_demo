@@ -6,7 +6,7 @@ import {
 
 
 } from '../reducers/city';
-import { searchCityByLocation } from '../util/services';
+import { searchCityByLocation, fetchWeatherByLocation } from '../util/services';
 
 
 export function* addMainCity(action: any) {
@@ -14,7 +14,16 @@ export function* addMainCity(action: any) {
         //debugger
         //console.log("action: ", action.payload)
         const res = yield call(searchCityByLocation, action.payload);
-        yield put(addMainCitySuccess(res.data));
+        const weather = yield call(fetchWeatherByLocation, action.payload);
+        console.log(weather.data)
+        yield put(addMainCitySuccess({
+            ...res.data, 
+            main: weather?.data.main,
+            wind: weather?.data.wind,
+            clouds: weather?.data.clouds,
+            weather: weather?.data.weather,
+
+        }));
         
     } catch (error) {
         console.log("err while addMainCity: ", error);

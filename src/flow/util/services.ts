@@ -25,3 +25,13 @@ export async function searchCityByLocation(data: {}){
     return axios.get(CITY_URL + '/reverse', { params });
 };
 
+export async function fetchWeatherByLocation(data: {}){
+    let params = {
+        appid: OPEN_WEATHER_API_KEY,
+        lang: 'vi',
+        lat: data && data.lat ? data.lat : 0,
+        lon: data && data.lon ? data.lon : 0,
+    }
+    return axios.get(URL.fetchWeatherByLocation, { params });
+};
+
