@@ -5,16 +5,16 @@ import {
     addMainCityFail,
 
 
-} from '../reducers/mainCity';
+} from '../reducers/city';
 import { searchCityByLocation } from '../util/services';
 
 
 export function* addMainCity(action: any) {
     try {
-        console.log("action: ", action.payload)
+        //debugger
+        //console.log("action: ", action.payload)
         const res = yield call(searchCityByLocation, action.payload);
-        console.log("res: ", res.data)
-        //yield put(fetchImageDataSuccess(imagePaths))
+        yield put(addMainCitySuccess(res.data));
         
     } catch (error) {
         console.log("err while addMainCity: ", error);
@@ -25,7 +25,7 @@ export function* addMainCity(action: any) {
 }
 
 
-export function* watchMainCity() {
+export function* watchCity() {
     // debugger
     yield takeEvery(addMainCityStart, addMainCity);
     

@@ -1,5 +1,5 @@
-import { reducer as mainCity} from './mainCity';
+import { reducer as city} from './city';
 
 export default {
-    mainCity,
+    city,
 };

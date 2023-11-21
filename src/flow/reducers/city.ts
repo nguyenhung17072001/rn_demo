@@ -1,5 +1,5 @@
 import { createActions, handleActions } from 'redux-actions';
-const defaultState = { mainCity: null, error: null, isLoading: false };
+const defaultState = {mainCity: null, cityList: null, error: null, isLoading: false };
 
 
 export const { addMainCityStart, addMainCitySuccess, addMainCityFail } = createActions({

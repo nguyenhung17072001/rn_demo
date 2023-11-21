@@ -18,16 +18,20 @@ import Geolocation from '@react-native-community/geolocation';
 
 
 //action
-import { addMainCityStart } from '../../flow/reducers/mainCity';
+import { addMainCityStart } from '../../flow/reducers/city';
 
 
 
 interface HomeProps {
     addMainCity: ({})=> void;
+    mainCity: Object;
 }
 const Home = memo((props: HomeProps) => {
     const navigation = useNavigation();
     const [region, setRegion] = useState({});
+
+
+
     const getCurrentLocation = () => {
         Geolocation.getCurrentPosition((res)=> {
             setRegion({
@@ -49,6 +53,7 @@ const Home = memo((props: HomeProps) => {
         getCurrentLocation();
         
     }, []);
+    console.log("zzzzz: ", props.mainCity)
     
 
   
@@ -93,7 +98,7 @@ const Home = memo((props: HomeProps) => {
 
 const mapStateToProps = (state: any) => {
     return {
-        
+        mainCity: state?.city?.mainCity
     }
 }
 

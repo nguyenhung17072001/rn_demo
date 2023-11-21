@@ -1,10 +1,10 @@
 import { all } from 'redux-saga/effects';
-import { watchMainCity } from './mainCity';
+import { watchCity } from './city';
 
 export default function* rootSaga() {
     try {
         yield all([
-            watchMainCity(),
+            watchCity(),
         ]);
     } catch (err) {
         console.log('err111111111: ', err);
