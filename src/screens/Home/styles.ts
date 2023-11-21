@@ -27,6 +27,30 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         
     },
+    weatherTodayContainer: {
+        backgroundColor: Colors.grey,
+        paddingVertical: Constants.width * 0.02,
+        marginHorizontal: Constants.width * 0.02,
+        paddingHorizontal: Constants.width * 0.04,
+        borderRadius: 8,
+    },
+    locationContainer: {
+        flexDirection: 'row',
+        alignItems: "center",
+        
+        
+    },
+    locationText: {
+        color: Colors.white,
+        fontFamily: Fonts.semiBold,
+        fontSize: 16,
+        paddingHorizontal: Constants.width * 0.01,
+    },
+    timeText: {
+        color: Colors.borderColor,
+        fontFamily: Fonts.semiBold,
+        fontSize: 12,
+    }
   
 });
 

@@ -15,13 +15,13 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Header from '../../components/HomeHeader';
 import Geolocation from '@react-native-community/geolocation';
-
+import moment from 'moment';
 
 //action
 import { addMainCityStart } from '../../flow/reducers/city';
 
 
-
+moment.locale('vi');
 interface HomeProps {
     addMainCity: ({})=> void;
     mainCity: Object;
@@ -55,7 +55,7 @@ const Home = memo((props: HomeProps) => {
     }, []);
     console.log("zzzzz: ", props.mainCity)
     
-
+    
   
 
     return (
@@ -82,8 +82,22 @@ const Home = memo((props: HomeProps) => {
                     </View>
                 </View>
 
-                <View>
-
+                <View style={styles.weatherTodayContainer}>
+                    <View style={styles.locationContainer}>
+                        <Icon name='location' size={22} color= {Colors.white} />
+                        <Text style={styles.locationText}>
+                            {props.mainCity?.address?.road ? props.mainCity?.address?.road : props.mainCity?.address?.suburb}
+                        </Text>
+                    </View>
+                    <View>
+                        <Text style={styles.timeText}>
+                            {moment(new Date()).format('llll')}
+                        </Text>
+                    </View>
+                    <View style={styles.d}>
+                        
+                    </View>
+                    
                 </View>
             </ScrollView>
         
