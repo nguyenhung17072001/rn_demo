@@ -1,5 +1,6 @@
 const Colors = {
   backgroundColor: "#d6edfc",
+  yellow: "yellow",
   paleYellow: '#E9D1AB',
   white: 'white',
   redText: "#910734",

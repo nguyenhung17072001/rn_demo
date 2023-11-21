@@ -19,6 +19,8 @@ import moment from 'moment';
 
 //action
 import { addMainCityStart } from '../../flow/reducers/city';
+import { TouchEventType } from 'react-native-gesture-handler/lib/typescript/TouchEventType';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 moment.locale('vi');
@@ -28,8 +30,8 @@ interface HomeProps {
 }
 const Home = memo((props: HomeProps) => {
     const navigation = useNavigation();
-    const [region, setRegion] = useState({});
-
+    const [region, setRegion] = useState<Object>({});
+    const [status, setStatus] = useState<Object>({});
 
 
     const getCurrentLocation = () => {
@@ -55,6 +57,68 @@ const Home = memo((props: HomeProps) => {
     }, []);
     console.log("zzzzz: ", props.mainCity)
     
+    useEffect(()=> {
+        
+        switch (props?.mainCity?.weather[0]?.icon) {
+            case '01d' || '01n':
+                setStatus({
+                    icon: 'sunny',
+                    color: Colors.yellow,
+                    description: 'Bầu trời quang đãng'
+                })
+                break;
+            case '02d' || '02n':
+                setStatus({
+                    icon: 'cloud-circle',
+                    color: Colors.yellow,
+                    description: 'Ít mây phân tán'
+                })
+                break;
+            case '03d' || '03n':
+                setStatus({
+                    icon: 'cloud-outline',
+                    color: Colors.borderColor,
+                    description: 'Có mây rải rác'
+                })
+                break;
+            case '04d' || '04n':
+                setStatus({
+                    icon: 'cloud-outline',
+                    color: Colors.borderColor,
+                    description: 'Nhiều mây'
+                })
+                break;
+            case '09d' || '09n':
+                setStatus({
+                    icon: 'rainy-outline',
+                    color: Colors.borderColor,
+                    description: 'Mưa nhỏ'
+                })
+                break;
+            case '10d' || '10n':
+                setStatus({
+                    icon: 'rainy',
+                    color: Colors.borderColor,
+                    description: 'Mưa'
+                })
+                break;
+            case '13d' || '13n':
+                setStatus({
+                    icon: 'thunderstorm',
+                    color: Colors.borderColor,
+                    description: 'Mưa có sấm sét'
+                })
+                break;
+            
+            default:
+                setStatus({
+                    icon: 'sunny',
+                    color: Colors.yellow,
+                    description: 'Không xác định'
+                })
+                break;
+        }
+    }, [region]);
     
   
 
@@ -68,7 +132,7 @@ const Home = memo((props: HomeProps) => {
             />
             
             <ScrollView>
-                <Header />
+                <Header headerName={props.mainCity?.address?.road ? props.mainCity?.address?.road : props.mainCity?.address?.suburb} />
                 <View>
                     <Image
                         resizeMode="contain"
@@ -88,14 +152,33 @@ const Home = memo((props: HomeProps) => {
                         <Text style={styles.locationText}>
                             {props.mainCity?.address?.road ? props.mainCity?.address?.road : props.mainCity?.address?.suburb}
                         </Text>
+                        <TouchableOpacity onPress={getCurrentLocation}>
+                            <Icon name='refresh' size={17} />
+                        </TouchableOpacity>
                     </View>
                     <View>
                         <Text style={styles.timeText}>
                             {moment(new Date()).format('llll')}
                         </Text>
                     </View>
-                    <View style={styles.d}>
-                        
+                    <View style={styles.row}>
+                        <View style={styles.row}>
+                            <Icon name={status.icon} color={status.color} size={44}/>
+                            <Text style={styles.tempText}>
+                                {Math.round(props.mainCity.main.temp-273.15)} °C
+                            </Text>
+                        </View>
+                        <View style={styles.detailContainer}>
+                            <Text style={styles.descriptionText}>
+                                {status.description}
+                            </Text>
+                            <Text style={styles.descriptionText}>
+                                Độ ẩm {props.mainCity.main.humidity}%
+                            </Text>
+                            <Text style={styles.descriptionText}>
+                                Sức gió {props.mainCity.wind.speed}m/s
+                            </Text>
+                        </View>
                     </View>
                     
                 </View>

@@ -50,6 +50,27 @@ const styles = StyleSheet.create({
         color: Colors.borderColor,
         fontFamily: Fonts.semiBold,
         fontSize: 12,
+    },
+    row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    tempText: {
+        color: Colors.white,
+        fontFamily: Fonts.semiBold,
+        fontSize: 18,
+        paddingHorizontal: Constants.width * 0.03,
+    },
+    detailContainer: {
+        flex: 1,
+        //backgroundColor: "red",
+        alignItems: 'flex-end'
+    },
+    descriptionText: {
+        color: Colors.white,
+        fontFamily: Fonts.semiBold,
+        fontSize: 13,
+        paddingHorizontal: Constants.width * 0.02,
     }
   
 });

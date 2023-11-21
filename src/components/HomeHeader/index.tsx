@@ -12,7 +12,11 @@ import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const Header = memo(() => {
+
+interface HeaderProps {
+    headerName: String;
+}
+const Header = memo((props: HeaderProps) => {
     const navigation = useNavigation();
   
     return (
@@ -21,7 +25,7 @@ const Header = memo(() => {
                 {/* <Icon name='' /> */}
             </TouchableOpacity>
             <Text style={styles.headerName}>
-                Hà Nội
+                {props.headerName}
             </Text>
             <TouchableOpacity>
                 <Icon name="add" size={28} color={Colors.blackText} />
