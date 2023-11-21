@@ -9,8 +9,11 @@ import React, {useEffect} from 'react';
 
 import {StyleSheet, Text, View, Platform} from 'react-native';
 import RootNavigation from './src/navigation';
-
+import { Provider } from 'react-redux';
 import { check, PERMISSIONS, request } from 'react-native-permissions';
+import makeStore from './src/flow/store';
+
+
 const requestLocationPermission = async () => {
   try {
     const permission = Platform.select({
@@ -32,13 +35,16 @@ const requestLocationPermission = async () => {
   }
 };
 
+
+const {store, persistor} = makeStore({});
 const App = () => {
   useEffect(()=> {
     requestLocationPermission();
   }, [])
   return (
-    
-    <RootNavigation />
+    <Provider store={store}>
+      <RootNavigation />
+    </Provider>
     
   )
 };

@@ -8,6 +8,7 @@ import {
     ScrollView,
     ImageBackground
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Images, Colors, Strings, Constants } from '../../core';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
@@ -16,7 +17,15 @@ import Header from '../../components/HomeHeader';
 import Geolocation from '@react-native-community/geolocation';
 
 
-const Home = memo(() => {
+//action
+import { addMainCityStart } from '../../flow/reducers/mainCity';
+
+
+
+interface HomeProps {
+    addMainCity: ({})=> void;
+}
+const Home = memo((props: HomeProps) => {
     const navigation = useNavigation();
     const [region, setRegion] = useState({});
     const getCurrentLocation = () => {
@@ -25,8 +34,9 @@ const Home = memo(() => {
                 latitude: res.coords.latitude,
                 longitude: res.coords.longitude,
                 
-            })
-        })
+            });
+            props.addMainCity(region);
+        });
     };
     useEffect(()=> {
         getCurrentLocation();
@@ -72,4 +82,19 @@ const Home = memo(() => {
     );
 });
 
-export default Home;
+
+const mapStateToProps = (state: any) => {
+    return {
+        
+    }
+}
+
+const mapStateToDispatch = (dispatch: (action: any)=> void) => {
+    return {
+        addMainCity: (data: {})=> {
+            dispatch(addMainCityStart(data));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapStateToDispatch)(Home);
