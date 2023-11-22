@@ -1,5 +1,6 @@
 //import axios from "axios";
-import axios from './http';
+import http from './http';
+import axios from 'axios';
 import { URL } from './url';
 
 
@@ -13,7 +14,7 @@ export async function searchCityByName(data: {}){
         format: 'json',
         q: data && data.q ? data.q : '',
     }
-    return axios.get(CITY_URL + '/search', { params });
+    return http.get(CITY_URL + '/search', { params });
 };
 
 export async function searchCityByLocation(data: {}){
@@ -22,7 +23,7 @@ export async function searchCityByLocation(data: {}){
         lat: data && data.lat ? data.lat : 0,
         lon: data && data.lon ? data.lon : 0,
     }
-    return axios.get(CITY_URL + '/reverse', { params });
+    return http.get(CITY_URL + '/reverse', { params });
 };
 
 export async function fetchWeatherByLocation(data: {}){
@@ -32,6 +33,6 @@ export async function fetchWeatherByLocation(data: {}){
         lat: data && data.lat ? data.lat : 0,
         lon: data && data.lon ? data.lon : 0,
     }
-    return axios.get(URL.fetchWeatherByLocation, { params });
+    return http.get(URL.fetchWeatherByLocation, { params });
 };
 

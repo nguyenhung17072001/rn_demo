@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     },
     line: {
         height: 1,
-        width: 100,
+        width: 400,
         color: Colors.redText
     }
     

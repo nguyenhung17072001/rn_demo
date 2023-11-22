@@ -22,41 +22,31 @@ interface TextFieldProps {
 }
 const TextField = memo((props: TextFieldProps) => {
     const [value, setValue] = useState('');
-    const [suggestions, setSuggestions] = useState([]);
-    const [data, setData] = useState([
-        { id: 1, name: 'Apple' },
-        { id: 2, name: 'Banana' },
-        { id: 3, name: 'B' },
-        // Thêm các dữ liệu gợi ý khác vào đây
-    ]);
+    const [data, setData] = useState([]);
+    let timeout: NodeJS.Timeout;
+
 
     useEffect(()=> {
-        searchCityByName({
-            q: value
-        })
-        .then((res)=> {
-            console.log("========: ", res.data)
-        })
-        .catch((err)=> {
-            console.log("err========: ", err)
-        })
+        const handleSearchCityByName = () => {
+            searchCityByName({ q: value })
+                .then((res)=> {
+                    setData(res.data);
+                    console.log("========: ", res.data);
+                })
+                .catch((err)=> {
+                    console.log("err========: ", err);
+                });
+        };
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(handleSearchCityByName, 200);
+
+        return () => clearTimeout(timeout);
         
     }, [value]);
 
-    const onChangeText = (text) => {
-        if (text) {
-            const newData = data.filter((item) => {
-            const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
-            const textData = text.toUpperCase();
-            return itemData.indexOf(textData) > -1;
-        });
-        setSuggestions(newData);
-        setValue(text);
-        } else {
-            setSuggestions([]);
-            setValue(text);
-        }
-    };
+    
     
     return (
         <View>
@@ -67,12 +57,12 @@ const TextField = memo((props: TextFieldProps) => {
                     placeholderTextColor={Colors.placeholderTextColor}
                     placeholder={props.placeholder}
                     value={value}
-                    onChangeText={(text) => onChangeText(text)}
+                    onChangeText={(text) => setValue(text)}
                 />
             </View>
             
             <View style={styles.suggestionContainer}>
-            {suggestions.map((item, index) => (
+            {data.map((item, index) => (
                 <TouchableOpacity style={styles.suggestionItem} key={index}>
                     <Text style={styles.suggestionText}>
                         {item.name}
