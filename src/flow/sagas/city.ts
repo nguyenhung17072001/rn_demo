@@ -44,10 +44,10 @@ export function* addCity(action: any) {
         //console.log("weather: ", weather)
         yield put(addCitySuccess({
             ...action.payload, 
-            main: weather?.data.main,
-            wind: weather?.data.wind,
-            clouds: weather?.data.clouds,
-            weather: weather?.data.weather,
+            //main: weather?.data.main,
+            //wind: weather?.data.wind,
+            //clouds: weather?.data.clouds,
+            //weather: weather?.data.weather,
 
         }));
         

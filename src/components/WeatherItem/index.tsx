@@ -13,14 +13,32 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
 
+
+//action
+import { fetchWeatherByLocation } from '../../flow/util/services';
+
+
 interface WeatherItemProps {
     item: any;
 }
 const WeatherItem = memo((props: WeatherItemProps) => {
     const navigation = useNavigation();
-    
+    const [data, setData] = useState(props?.item);
     const [status, setStatus] = useState<Object>({});
     
+    useEffect(()=> {
+        fetchWeatherByLocation({
+            lat: props?.item?.lat,
+            lon: props?.item?.lon,
+        })
+        .then((res) => {
+            setData(...data, res.data);
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }, [])
+
     useEffect(()=> {
         switch (props?.item?.weather[0]?.icon) {
             case '01d' || '01n':
