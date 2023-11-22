@@ -25,12 +25,11 @@ import TextField from '../../components/TextField';
 
 moment.locale('vi');
 interface CityListProps {
-    addMainCity: ({})=> void;
-    mainCity: Object;
+    cityList: any;
 }
 const SearchCity = memo((props: CityListProps) => {
     const navigation = useNavigation();
-    
+    console.log("====: ", props.cityList)
     
     
   
@@ -59,7 +58,7 @@ const SearchCity = memo((props: CityListProps) => {
 
 const mapStateToProps = (state: any) => {
     return {
-        
+        cityList: state.city.cityList,
     }
 }
 

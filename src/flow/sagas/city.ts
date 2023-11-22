@@ -39,9 +39,9 @@ export function* addMainCity(action: any) {
 export function* addCity(action: any) {
     try {
         //debugger
-        console.log("action: ", action.payload)
+        //console.log("action: ", action.payload)
         const weather = yield call(fetchWeatherByLocation, action.payload );
-        console.log("weather: ", weather)
+        //console.log("weather: ", weather)
         yield put(addCitySuccess({
             ...action.payload, 
             main: weather?.data.main,

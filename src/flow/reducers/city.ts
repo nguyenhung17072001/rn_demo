@@ -1,5 +1,5 @@
 import { createActions, handleActions } from 'redux-actions';
-const defaultState = {mainCity: null, cityList: null, error: null, isLoading: false };
+const defaultState = {mainCity: null, cityList: [], error: null, isLoading: false };
 
 
 export const { addMainCityStart, addMainCitySuccess, addMainCityFail } = createActions({
@@ -33,11 +33,13 @@ export const { addCityStart, addCitySuccess, addCityFail } = createActions({
 const addCityAction = {
     [addCityStart]: (state: any) => { return { ...state, error: null, isLoading: true, type: "addCityStart" } },
     [addCitySuccess]: (state: any, { payload: { data } }) => {
+        const { cityList } = state;
+        const updatedCityList = [...cityList, data];
         return ({
             ...state,
             error: null,
             isLoading: false,
-            cityList: data,
+            cityList: updatedCityList,
             type: 'addCitySuccess'
         });
     },
