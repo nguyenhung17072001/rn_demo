@@ -114,18 +114,18 @@ const WeatherItem = memo((props: WeatherItemProps) => {
                 <View style={styles.row}>
                     <Icon name={status.icon} color={status.color} size={44}/>
                     <Text style={styles.tempText}>
-                        {Math.round(props.item.main.temp-273.15)} °C
+                        {Math.round(props.item.main?.temp-273.15)} °C
                     </Text>
                 </View>
                 <View style={styles.detailContainer}>
                     <Text style={styles.descriptionText}>
-                        {status.description}
+                        {status?.description}
                     </Text>
                     <Text style={styles.descriptionText}>
-                        Độ ẩm {props.item.main.humidity}%
+                        Độ ẩm {data.main?.humidity}%
                     </Text>
                     <Text style={styles.descriptionText}>
-                        Sức gió {props.item.wind.speed}m/s
+                        Sức gió {data?.wind?.speed}m/s
                     </Text>
                 </View>
             </View>
