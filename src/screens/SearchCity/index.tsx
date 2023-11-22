@@ -29,7 +29,7 @@ interface CityListProps {
 }
 const SearchCity = memo((props: CityListProps) => {
     const navigation = useNavigation();
-    console.log("====: ", props.cityList)
+    //console.log("====: ", props.cityList)
     
     
   

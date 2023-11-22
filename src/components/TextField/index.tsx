@@ -21,6 +21,7 @@ interface TextFieldProps {
     addCity: ({}) => void;
 }
 const TextField = memo((props: TextFieldProps) => {
+    const navigation = useNavigation();
     const [value, setValue] = useState('');
     const [data, setData] = useState([]);
     let timeout: NodeJS.Timeout;
@@ -68,7 +69,7 @@ const TextField = memo((props: TextFieldProps) => {
                         lat: item.lat,
                         lon: item.lon,
                     });
-                    
+                    navigation.goBack();
                 }
                 return(
                     <TouchableOpacity onPress={handleAddCity} style={styles.suggestionItem} key={index}>
