@@ -28,7 +28,7 @@ interface CityListProps {
     addMainCity: ({})=> void;
     mainCity: Object;
 }
-const CityList = memo((props: CityListProps) => {
+const SearchCity = memo((props: CityListProps) => {
     const navigation = useNavigation();
     
     
@@ -47,9 +47,11 @@ const CityList = memo((props: CityListProps) => {
             <ScrollView>
                 <Header
                     headerName='Các địa điểm khác'
-                    action={true}
+                    backAction={true}
                 />
-                
+                <TextField 
+                    placeholder="Nhập tên thành phố"
+                />
                 
             </ScrollView>
         
@@ -64,7 +66,7 @@ const CityList = memo((props: CityListProps) => {
 
 const mapStateToProps = (state: any) => {
     return {
-        mainCity: state?.city?.mainCity
+        
     }
 }
 
@@ -74,4 +76,4 @@ const mapStateToDispatch = (dispatch: (action: any)=> void) => {
     }
 }
 
-export default connect(mapStateToProps, mapStateToDispatch)(CityList);
+export default connect(mapStateToProps, mapStateToDispatch)(SearchCity);

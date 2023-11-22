@@ -15,21 +15,29 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 interface HeaderProps {
     headerName: String;
+    action?: boolean;
+    backAction?: boolean;
 }
 const Header = memo((props: HeaderProps) => {
     const navigation = useNavigation();
   
     return (
         <View style={styles.header}>
-            <TouchableOpacity>
-                {/* <Icon name='' /> */}
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
+            {
+                props.backAction ?
+                <Icon name="arrow-back" size={28} color={Colors.blackText} />
+                : null
+            }
             </TouchableOpacity>
             <Text style={styles.headerName}>
                 {props.headerName}
             </Text>
-            <TouchableOpacity>
-                {/* <Icon name="add" size={28} color={Colors.blackText} /> */}
+            {props.action ?
+            <TouchableOpacity onPress={()=>navigation.navigate("SearchCity")}>
+                <Icon name="add" size={28} color={Colors.blackText} />
             </TouchableOpacity>
+            : <View/>}
         </View>
     );
 });
