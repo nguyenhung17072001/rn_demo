@@ -23,7 +23,7 @@ interface WeatherItemProps {
 }
 const WeatherItem = memo((props: WeatherItemProps) => {
     const navigation = useNavigation();
-    const [data, setData] = useState(props?.item);
+    const [data, setData] = useState(null);
     const [status, setStatus] = useState<Object>({});
     
     useEffect(()=> {
@@ -32,7 +32,12 @@ const WeatherItem = memo((props: WeatherItemProps) => {
             lon: props?.item?.lon,
         })
         .then((res) => {
-            setData(...data, res.data);
+            setData({
+                //...data, 
+                ...res.data,
+                icon: res?.data?.weather[0],
+            });
+            //console.log(data)
         })
         .catch((err) => {
             console.log(err)
@@ -40,66 +45,71 @@ const WeatherItem = memo((props: WeatherItemProps) => {
     }, [])
 
     useEffect(()=> {
-        switch (props?.item?.weather[0]?.icon) {
-            case '01d' || '01n':
-                setStatus({
-                    icon: 'sunny',
-                    color: Colors.yellow,
-                    description: 'Bầu trời quang đãng'
-                })
-                break;
-            case '02d' || '02n':
-                setStatus({
-                    icon: 'cloud-circle',
-                    color: Colors.yellow,
-                    description: 'Ít mây phân tán'
-                })
-                break;
-            case '03d' || '03n':
-                setStatus({
-                    icon: 'cloud-outline',
-                    color: Colors.borderColor,
-                    description: 'Có mây rải rác'
-                })
-                break;
-            case '04d' || '04n':
-                setStatus({
-                    icon: 'cloud-outline',
-                    color: Colors.borderColor,
-                    description: 'Nhiều mây'
-                })
-                break;
-            case '09d' || '09n':
-                setStatus({
-                    icon: 'rainy-outline',
-                    color: Colors.borderColor,
-                    description: 'Mưa nhỏ'
-                })
-                break;
-            case '10d' || '10n':
-                setStatus({
-                    icon: 'rainy',
-                    color: Colors.borderColor,
-                    description: 'Mưa'
-                })
-                break;
-            case '13d' || '13n':
-                setStatus({
-                    icon: 'thunderstorm',
-                    color: Colors.borderColor,
-                    description: 'Mưa có sấm sét'
-                })
-                break;
+        if(data?.icon){
             
-            default:
-                setStatus({
-                    icon: 'sunny',
-                    color: Colors.yellow,
-                    description: 'Không xác định'
-                })
-                break;
+            switch (data?.icon?.icon) {
+                case '01d' || '01n':
+                    setStatus({
+                        icon: 'sunny',
+                        color: Colors.yellow,
+                        description: 'Bầu trời quang đãng'
+                    })
+                    break;
+                case '02d' || '02n':
+                    setStatus({
+                        icon: 'cloud-circle',
+                        color: Colors.yellow,
+                        description: 'Ít mây phân tán'
+                    })
+                    break;
+                case '03d' || '03n':
+                    setStatus({
+                        icon: 'cloud-outline',
+                        color: Colors.borderColor,
+                        description: 'Có mây rải rác'
+                    })
+                    break;
+                case '04d' || '04n':
+                    setStatus({
+                        icon: 'cloud-outline',
+                        color: Colors.borderColor,
+                        description: 'Nhiều mây'
+                    })
+                    break;
+                case '09d' || '09n':
+                    setStatus({
+                        icon: 'rainy-outline',
+                        color: Colors.borderColor,
+                        description: 'Mưa nhỏ'
+                    })
+                    break;
+                case '10d' || '10n':
+                    setStatus({
+                        icon: 'rainy',
+                        color: Colors.borderColor,
+                        description: 'Mưa'
+                    })
+                    break;
+                case '13d' || '13n':
+                    setStatus({
+                        icon: 'thunderstorm',
+                        color: Colors.borderColor,
+                        description: 'Mưa có sấm sét'
+                    })
+                    break;
+                
+                default:
+                    setStatus({
+                        icon: 'sunny',
+                        color: Colors.yellow,
+                        description: 'Không xác định'
+                    })
+                    break;
+            } 
         }
+        
     }, []);
+    console.log('data?.icon: ', data)
     return (
         <TouchableOpacity style={styles.weatherTodayContainer}>
             <View style={styles.locationContainer}>
@@ -114,7 +124,7 @@ const WeatherItem = memo((props: WeatherItemProps) => {
                 <View style={styles.row}>
                     <Icon name={status.icon} color={status.color} size={44}/>
                     <Text style={styles.tempText}>
-                        {Math.round(props.item.main?.temp-273.15)} °C
+                        {Math.round(data?.main?.temp-273.15)} °C
                     </Text>
                 </View>
                 <View style={styles.detailContainer}>
@@ -122,7 +132,7 @@ const WeatherItem = memo((props: WeatherItemProps) => {
                         {status?.description}
                     </Text>
                     <Text style={styles.descriptionText}>
-                        Độ ẩm {data.main?.humidity}%
+                        Độ ẩm {data?.main?.humidity}%
                     </Text>
                     <Text style={styles.descriptionText}>
                         Sức gió {data?.wind?.speed}m/s
