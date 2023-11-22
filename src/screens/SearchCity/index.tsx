@@ -43,7 +43,6 @@ const SearchCity = memo((props: CityListProps) => {
                 //backgroundColor={Colors.backgroundColor}
                 //barStyle={'dark-content'}
             />
-            
             <ScrollView>
                 <Header
                     headerName='Các địa điểm khác'
@@ -51,14 +50,8 @@ const SearchCity = memo((props: CityListProps) => {
                 />
                 <TextField 
                     placeholder="Nhập tên thành phố"
-                />
-                
+                />  
             </ScrollView>
-        
-        
-
-      
-      
         </SafeAreaView>
     );
 });

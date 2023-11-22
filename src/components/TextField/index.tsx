@@ -31,7 +31,6 @@ const TextField = memo((props: TextFieldProps) => {
             searchCityByName({ q: value })
                 .then((res)=> {
                     setData(res.data);
-                    console.log("========: ", res.data);
                 })
                 .catch((err)=> {
                     console.log("err========: ", err);
@@ -62,15 +61,25 @@ const TextField = memo((props: TextFieldProps) => {
             </View>
             
             <View style={styles.suggestionContainer}>
-            {data.map((item, index) => (
-                <TouchableOpacity style={styles.suggestionItem} key={index}>
-                    <Text style={styles.suggestionText}>
-                        {item.name}
-                    </Text>
-                    <View style={styles.line} />
-                </TouchableOpacity>
-                
-            ))}
+            {data.map((item, index) => {
+                const handleAddCity =()=> {
+                    props.addCity({
+                        name: item.name,
+                        lat: item.lat,
+                        lon: item.lon,
+                    });
+                    
+                }
+                return(
+                    <TouchableOpacity onPress={handleAddCity} style={styles.suggestionItem} key={index}>
+                        <Text style={styles.suggestionText}>
+                            {item.name}
+                        </Text>
+                        <View style={styles.line} />
+                    </TouchableOpacity>
+                    
+                )
+            })}
             </View>
             
         </View>
