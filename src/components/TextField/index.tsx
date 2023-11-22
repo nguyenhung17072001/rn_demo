@@ -7,40 +7,54 @@ import {
     TextInput, 
     TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
 import { Images, Colors, Strings, Constants } from '../../core';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {  List } from 'react-native-paper';
+import { addCityStart } from '../../flow/reducers/city';
+import { searchCityByName } from '../../flow/util/services';
+
 
 interface TextFieldProps {
     placeholder: String;
+    addCity: ({}) => void;
 }
 const TextField = memo((props: TextFieldProps) => {
-    const [query, setQuery] = useState('');
+    const [value, setValue] = useState('');
     const [suggestions, setSuggestions] = useState([]);
-
-
-
-    const yourData = [
+    const [data, setData] = useState([
         { id: 1, name: 'Apple' },
         { id: 2, name: 'Banana' },
         { id: 3, name: 'B' },
         // Thêm các dữ liệu gợi ý khác vào đây
-      ];
-    
-    const searchFilterFunction = (text) => {
+    ]);
+
+    useEffect(()=> {
+        searchCityByName({
+            q: value
+        })
+        .then((res)=> {
+            console.log("========: ", res.data)
+        })
+        .catch((err)=> {
+            console.log("err========: ", err)
+        })
+        
+    }, [value]);
+
+    const onChangeText = (text) => {
         if (text) {
-            const newData = yourData.filter((item) => {
+            const newData = data.filter((item) => {
             const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
             const textData = text.toUpperCase();
             return itemData.indexOf(textData) > -1;
         });
         setSuggestions(newData);
-        setQuery(text);
+        setValue(text);
         } else {
             setSuggestions([]);
-            setQuery(text);
+            setValue(text);
         }
     };
     
@@ -52,8 +66,8 @@ const TextField = memo((props: TextFieldProps) => {
                     style={styles.textInput}
                     placeholderTextColor={Colors.placeholderTextColor}
                     placeholder={props.placeholder}
-                    value={query}
-                    onChangeText={(text) => searchFilterFunction(text)}
+                    value={value}
+                    onChangeText={(text) => onChangeText(text)}
                 />
             </View>
             
@@ -73,5 +87,19 @@ const TextField = memo((props: TextFieldProps) => {
     );
 });
 
-export default TextField;
+const mapStateToProps = (state: any) => {
+    return {
+        
+    }
+}
+
+const mapStateToDispatch = (dispatch: (action: any)=> void) => {
+    return {
+        addCity: (data)=> {
+            dispatch(addCityStart(data))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapStateToDispatch)(TextField);
   

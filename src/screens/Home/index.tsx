@@ -55,7 +55,7 @@ const Home = memo((props: HomeProps) => {
         getCurrentLocation();
         
     }, []);
-    console.log("zzzzz: ", props.mainCity)
+    //console.log("zzzzz: ", props.mainCity)
     
     useEffect(()=> {
         
