@@ -18,8 +18,26 @@ const styles = StyleSheet.create({
         paddingRight: Constants.width * 0.04,
         color: Colors.blackText,
         fontFamily: Fonts.semiBold,
+        flex: 1,
 
-
+    },
+    suggestionContainer: {
+        backgroundColor: Colors.white,
+        marginHorizontal: Constants.width*0.04,
+        borderRadius: 8,
+        
+    },
+    suggestionText: {
+        color: Colors.grey
+    },
+    suggestionItem: {
+        paddingHorizontal: Constants.width*0.04,
+        paddingTop: Constants.width*0.02,
+    },
+    line: {
+        height: 1,
+        width: 100,
+        color: Colors.redText
     }
     
 

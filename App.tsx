@@ -12,7 +12,7 @@ import RootNavigation from './src/navigation';
 import { Provider } from 'react-redux';
 import { check, PERMISSIONS, request } from 'react-native-permissions';
 import makeStore from './src/flow/store';
-
+import { PaperProvider } from 'react-native-paper';
 
 const requestLocationPermission = async () => {
   try {
@@ -43,7 +43,10 @@ const App = () => {
   }, [])
   return (
     <Provider store={store}>
-      <RootNavigation />
+      <PaperProvider>
+        <RootNavigation />
+      </PaperProvider>
+      
     </Provider>
     
   )
